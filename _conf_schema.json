@@ -1,4 +1,16 @@
 {
+    "auto_inject_system_prompt": {
+        "description": "是否自动注入系统消息",
+        "type": "bool",
+        "default": true,
+        "hint": "关闭后需要手动添加好感度管理的提示词到系统消息中"
+    },
+    "default_injected_system_prompt": {
+        "description": "默认注入的系统消息内容（只读）",
+        "type": "text",
+        "default": "[系统提示]请根据对话质量在回复末尾添加[好感度持平]，[好感度大幅上升]，[好感度大幅下降]，[好感度上升]或[好感度下降]标记。示例：用户：你好！你：你好呀！今天过得怎么样？[好感度上升]",
+        "hint": "当自动注入系统消息时，使用该内容作为默认提示词"
+    },
     "admins_id": {
         "description": "管理员QQ号列表",
         "type": "list",
@@ -65,28 +77,52 @@
         "default": false,
         "hint": "开启后每个会话的黑名单将独立计算，关闭则使用全局黑名单"
     },
-    "session_based_counter": {
-        "description": "是否启用会话独立的计数器系统",
+    "session_based_pre_blacklist": {
+        "description": "是否启用会话独立的预拉黑计数系统",
         "type": "bool",
         "default": false,
-        "hint": "开启后每个会话的计数器将独立计算，关闭则使用全局计数器"
+        "hint": "开启后每个会话的预拉黑计数将独立计算，关闭则使用全局预拉黑计数"
     },
-    "auto_decrease_counter": {
-        "description": "是否启用低好感计数器自动减少功能",
+    "auto_expire_pre_blacklist": {
+        "description": "是否启用预拉黑计数自动消分功能",
         "type": "bool",
         "default": true,
-        "hint": "开启后低好感计数器会定期自动减少"
+        "hint": "开启后预拉黑计数会定期自动消分"
     },
-    "auto_decrease_counter_hours": {
-        "description": "低好感计数器减少间隔（小时）",
+    "auto_expire_pre_blacklist_hours": {
+        "description": "预拉黑计数消分间隔（小时）",
         "type": "int",
         "default": 24,
-        "hint": "每隔多少小时自动减少一次低好感计数器"
+        "hint": "每隔多少小时自动消去一次预拉黑计数"
     },
-    "auto_decrease_counter_amount": {
-        "description": "低好感计数器每次减少数量",
+    "auto_expire_pre_blacklist_amount": {
+        "description": "预拉黑计数每次消分数量",
         "type": "int",
         "default": 1,
-        "hint": "每次自动减少时减少的计数器数值"
+        "hint": "每次自动消去时减少的预拉黑计数值"
+    },
+    "auto_favor_recovery_enabled": {
+        "description": "是否启用好感度自动回升",
+        "type": "bool",
+        "default": false,
+        "hint": "开启后，低于阈值的好感度会定期自动回升"
+    },
+    "auto_favor_recovery_threshold": {
+        "description": "好感度自动回升阈值",
+        "type": "int",
+        "default": 0,
+        "hint": "好感度低于该值时会自动回升，回升上限为该值"
+    },
+    "auto_favor_recovery_hours": {
+        "description": "好感度自动回升间隔（小时）",
+        "type": "int",
+        "default": 24,
+        "hint": "每隔多少小时自动回升一次好感度"
+    },
+    "auto_favor_recovery_amount": {
+        "description": "好感度每次回升数量",
+        "type": "int",
+        "default": 1,
+        "hint": "每次自动回升时增加的好感度数值"
     }
 }
